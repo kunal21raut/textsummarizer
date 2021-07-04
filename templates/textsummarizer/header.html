@@ -1,15 +1,14 @@
 {% load static %}
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
- <!-- Navbar -->
- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'summary' %}">Text Summarizer</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -18,11 +17,14 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
                     <a class="nav-link active" aria-current="page" href="{% url 'summary' %}">Home</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'webpage_summary' %}">Web Page Summarizer</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{% url 'about' %}">About</a>
                 </li>
 
             </ul>
-            
+
             {% if user.is_authenticated %}
 
 
@@ -31,14 +33,18 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
                 <li class="nav-item dropdown">
 
                     <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
-                        data-toggle="dropdown"> <span class="text-light m-2 font-bold" style="font-size: 1.1rem;">Welcome,{{request.user | title}}</span></a>
+                        data-toggle="dropdown"> <span class="text-light m-2 font-bold"
+                            style="font-size: 1.1rem;">Welcome,
+                            <strong class="text-warning" onclick= "menuToggle()"> {{request.user | title}}</strong></span></a>
+                           
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a href="{%url 'logout_page' %}" class="dropdown-item btn btn-success">Logout</a>
-                        <!-- <div class="dropdown-divider"></div> -->
+                        <a href="{%url 'logout_page' %}" class="dropdown-item btn btn-success menuToggle">Logout</a>
+                     
                     </div>
+
                 </li>
-                <img src="{%static 'images/userprofile.png' %}" alt="" style="height:80%; width: 80%;" class="my-auto">
+                <img src="{%static 'images/userprofile.png' %}" alt="" style="height:30px; width: 30px;" class="my-auto" >
             </ul>
 
             {% else %}
@@ -53,6 +59,8 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 </nav>
 <!-- Navbar Ends here -->
 
+
+
 <!-- Message section -->
 {% for message in messages %}
 <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
@@ -63,10 +71,12 @@ integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG
 </div>
 {% endfor %}
 <!-- Message Section ends here -->
+{% if user.is_authenticated %}
+<div class="card" style="top: 0%; left: 90%;width: 10%;">
+    <a href="{%url 'logout_page' %}" class="btn btn-danger btn-sm text-white" style="color: white;">Logout</a>
+</div>
+{%endif%}
 
 
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

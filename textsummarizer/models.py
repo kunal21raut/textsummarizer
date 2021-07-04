@@ -5,9 +5,9 @@ from django.contrib.auth.models import User
 
 
 class Summary(models.Model):
-    user = models.ForeignKey(User,on_delete = models.CASCADE)
-    body = models.TextField()
-    date_created = models.DateTimeField()
+    user = models.ForeignKey(User,null = True,on_delete = models.CASCADE)
+    body = models.TextField(null=True,max_length=4000)
+    date_created = models.DateTimeField(auto_now_add=True)
 
 
     def __str__(self):

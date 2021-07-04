@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 
@@ -12,53 +13,7 @@
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
   <title>Text Summarizer</title>
-  <style>
-    .summary {
-      height: 300px;
-      overflow-y: scroll;
-    }
-
-    .save-btn {
-      color: rgb(3, 158, 80);
-      background: #ffffff;
-    }
-
-    .save-btn:hover {
-      color: white;
-    }
-
-    .btnd {
-      background: #f7f7f7;
-      border: none;
-      color: rgb(223, 41, 41);
-      padding: 9px 16px;
-      font-size: 16px;
-      cursor: pointer;
-      /* border-radius: 50%; */
-      font-weight: 600;
-    }
-
-    /* Darker background on mouse-over */
-    .btnd:hover {
-      background-color: rgb(247, 236, 213);
-      /* border-radius: 50%; */
-    }
-
-    .btn-copy {
-      background: #f7f7f7;
-      border: none;
-      color: rgb(16, 129, 77);
-      padding: 9px 16px;
-      font-size: 16px;
-      cursor: pointer;
-      /* border-radius: 50%; */
-      font-weight: 600;
-    }
-
-    .btn-copy:hover {
-      background-color: rgb(212, 248, 224);
-    }
-  </style>
+ <link rel="stylesheet" href="{%static 'css/style.css' %}">
 
 
 </head>
@@ -141,6 +96,15 @@
   {% endif %}
 
 
+<p> 
+
+  {{saved_sum}}
+</p>
+<hr>
+<br>
+
+
+
 
   <!-- Option 1: Bootstrap Bundle with Popper -->
   <!-- Optional JavaScript -->
@@ -149,28 +113,8 @@
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
 
-
-
-  <script>
-    function clearcontent(elementID) {
-      document.getElementById(elementID).innerHTML = "";
-    }
-
-    function handleCopyTextFromParagraph() {
-      const body = document.querySelector('body');
-      const paragraph = document.querySelector('#text-to-speech');
-      const area = document.createElement('textarea');
-      body.appendChild(area);
-
-      area.value = paragraph.innerText;
-      area.select();
-      document.execCommand('copy');
-
-      body.removeChild(area);
-      alert("Summary is Copied!")
-    }
-
-  </script>
+<script src="{%static 'Javascript/index.js' %}"></script>
+   
 
 </body>
 
